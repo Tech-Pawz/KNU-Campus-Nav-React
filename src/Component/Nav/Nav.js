@@ -16,11 +16,9 @@ export default function Nav() {
                 <img src="./images/wlogo.png" alt="logo" />
             </div>
             <div className="w-inp-box" style={{ width: "344px", height: "48px", position: "relative", background: "white", boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.20)", borderRadius: "8px", margin: "10px auto" }}>
-                <input className="w-inp" placeholder="강의실 찾기" type="text" />
-                <ActionBtn id={iconD[0].id} d={iconD[0].d} left={"16px"}/>
-                <ActionBtn id={iconD[1].id} d={iconD[1].d} left={"304px"}/>
+                <input className="w-inp" placeholder="출발점" type="text" />
+                <ActionBtn id={iconD[1].id} d={iconD[1].d} right={"16px"}/>
             </div>
-      
             <Place/>
 
         </div>
