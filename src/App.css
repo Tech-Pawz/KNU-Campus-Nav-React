@@ -1,0 +1,146 @@
+/* 노말라이즈 시작 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+html, body , #root, .App { width: 100%; height: 100%; overflow: hidden;}
+/* 노말라이즈 끝 */
+
+/* 라이브러리 시작 */
+.con {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-jc-c {
+  justify-content: center;
+}
+
+.flex-ai-c {
+  align-items: center;
+}
+
+.flex-fd-c {
+  flex-direction: column;
+}
+
+.flex-jc-sa {
+  justify-content: space-around;
+}
+
+.flex-jc-sb {
+  justify-content: space-between;
+}
+
+.flex-fw-w {
+  flex-wrap: wrap;
+}
+
+.ta-c {
+  text-align: center;
+}
+
+.po-rel{
+  position: relative;
+}
+
+.po-abs {
+  position: absolute;
+}
+
+.with-100 {
+  width: 100%;
+}
+
+.t-l-0{
+  top: 0;
+  left: 0;
+}
+/* 라이브러리 끝 */
+
+/* 커스텀 시작 */
+.logo {
+  margin: 10px;
+  width: 144px;
+}
+
+.logo > img {
+  width: inherit;
+}
+
+#nav {
+  position: absolute;
+  width: 390px;
+  background-color: #0079C2;
+  
+  /* border-top: 10px solid #00B185;
+  border-bottom: 10px solid #00B185; */
+  z-index: 1;
+}
+
+.BottomBar3 {
+  overflow: hidden;
+}
+.BottomBarItem {
+  background-color: #0079C2;
+}
+
+.BottomBarItem:hover {
+  cursor: pointer;
+  background-color: #0471b3;
+}
+
+.BottomBarItem.lite-green {
+  background-color: #00B185;
+}
+.BottomBarItem.lite-green:hover {
+  background-color: #04a980;
+  cursor: pointer;
+}
+.navlogo_green {
+  width: 140px;
+  margin: 5px 10px;
+}
+
+.map-wrap {
+  position: relative;
+  margin-left: 390px;
+  height: 100%;
+}
+
+#map {
+  outline: none;
+  z-index: 0;
+  top: 0;
+}
+
+.w-inp {
+  width: 240px;
+  left: 56px;
+  top: 12px;
+  position: absolute;
+  color: "rgba(0, 0, 0, 0.60)";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  word-wrap: break-word;
+  border: none;
+}
+
+.w-inp:focus {
+  outline: none; 
+}
+
+.w-inp:focus .w-inp-box {
+  background-color: #00B185;
+}
+/* 커스텀 끝 */
