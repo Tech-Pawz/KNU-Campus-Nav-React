@@ -1,0 +1,13 @@
+.nav-ul > li:nth-child(1) {
+    padding: 6px 23px 6px 8px;
+}
+
+.nav-ul > li:last-child {
+    padding: 6px 0px;
+}
+
+.place-list {
+    overflow-y: scroll;
+    margin: 0;
+    height: calc(100vh - 250px);
+}
