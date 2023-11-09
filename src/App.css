@@ -81,7 +81,7 @@ ul, li, ol {
 }
 
 #nav {
-  position: absolute;
+  position: fixed;
   width: 390px;
   background-color: #0079C2;
   
