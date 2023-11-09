@@ -42,7 +42,6 @@ export default function Place() {
             <div>{placeDataBase[2].icon}</div>
             <div>{placeDataBase[2].placeName}</div>
           </div>
-
         </div>
       </div>
 
@@ -61,8 +60,8 @@ const Inventory = ({ page, placeName }) => {
           <ActionBtn id={iconD[0].id} d={iconD[0].d} right={"16px"}/>
         </div>
         <ul className="place-list list-group">
-          {Array(100).fill().map(v => <li className="list-group-item">
-              <ul className='nav-ul' style={{display: "flex"}}>
+          {Array(100).fill().map((v, i) => <li className="list-group-item">
+              <ul key={i} className='nav-ul' style={{display: "flex"}}>
                 <li className='col'>B1</li>
                 <li>Dapibus ac facilisis in</li>
               </ul>
@@ -72,17 +71,3 @@ const Inventory = ({ page, placeName }) => {
     </div>
   );
 }
-
-
-// const NavUi = ({ icon, placeName, idx }) => {
-//   return (
-//     <div onClick={() => { }} className={idx % 2 == 0 ? "con BottomBarItem" : "con BottomBarItem lite-green"}>
-//       <div
-//         className='ta-c' style={{ color: 'white', padding: "13px 0" }}>
-//         <div>{icon}</div>
-//         <div>{placeName}</div>
-//       </div>
-
-//     </div>
-//   );
-// }

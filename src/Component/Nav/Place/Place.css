@@ -11,3 +11,15 @@
     margin: 0;
     height: calc(100vh - 250px);
 }
+
+.place-list::-webkit-scrollbar {
+    width: 7px;
+    padding: 3px;
+}
+.place-list::-webkit-scrollbar-thumb {
+    background-color: #5a5a5a61;
+    border-radius: 10px;
+}
+.place-list::-webkit-scrollbar-track {
+    background-color: #eeeeee;
+}
