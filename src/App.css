@@ -147,4 +147,43 @@ ul, li, ol {
 .w-inp:focus .w-inp-box {
   background-color: #00B185;
 }
+
+
+/* 키프레임 이름 = 애니메이션 이름 */
+@keyframes jump {
+  0% {
+    bottom: 58%;
+  }
+  95% {
+    width: 70px;
+  }
+  to {
+    bottom: 50%;
+    width:73px;
+    height:70px;
+  } 
+}
+
+#chatbot-wrap {
+  position: fixed;
+  width: 90px;
+  height: 90px;
+  right: 20px;
+  bottom: 25px;
+  z-index: 100;
+  background-color: #115083;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+#chatbot {
+  position: absolute;
+  align-items: center;
+  width: 70px;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  animation:jump .9s ease-in Infinite Alternate;
+}
+
 /* 커스텀 끝 */
