@@ -4,7 +4,6 @@ import Directions from '../Directions/Directions'
 import Recent from '../Recent/Recent'
 import Bus from '../Bus/Bus'
 import './Place.css';
-import dataPlace from '../dataPlace.json'
 
 
 // const iconD = [
@@ -14,6 +13,7 @@ import dataPlace from '../dataPlace.json'
 
 
 export default function Place({findBuil}) {
+  
   const placeDataBase = [
     { icon: <i className="fa-regular fa-building"></i>, placeName: "길찾기" },
     { icon: <i className="fa-solid fa-flask"></i>, placeName: "최근 검색" },

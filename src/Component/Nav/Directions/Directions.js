@@ -1,14 +1,25 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import $ from 'jquery';
 import dataPlace from '../dataPlace.json';
 
 
 
-export default function Directions({findBuil}) {
+export default function Directions({ findBuil = "샬롬관" }) {
+
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
+    const [nowBuil, setNowBuil] = useState('샬롬관');
+    const [builData, setBuilData] = useState(Object.values(dataPlace[nowBuil]));
     const startRef = useRef(null);
     const endRef = useRef(null);
+
+    useEffect(() => {
+        if (Object.keys(dataPlace).includes(findBuil)) {
+            setNowBuil(findBuil);
+            setBuilData(Object.values(dataPlace[findBuil]));
+        }
+    }, [findBuil]);
+
 
     return (
         <div className="po-abs" style={{ left: '0', top: '100%', width: '100%', height: '100vh', backgroundColor: '#eeeeee' }}>
@@ -40,10 +51,10 @@ export default function Directions({findBuil}) {
             </div>
 
             <ul className="place-list list-group">
-                {Object.keys(dataPlace).map((v, i) => <li className="list-group-item">
+                {Object.keys(dataPlace[nowBuil]).map((v, i) => <li className="list-group-item">
                     <ul key={i} className='nav-ul' style={{ display: "flex" }}>
-                        <li className='col'>B1</li>
-                        <li>Dapibus ac facilisis in</li>
+                        <li className='col'>{v}</li>
+                        <li>{dataPlace[nowBuil][v]}</li>
                     </ul>
                 </li>)}
             </ul>
