@@ -23,3 +23,11 @@
 .place-list::-webkit-scrollbar-track {
     background-color: #eeeeee;
 }
+
+.list-group-item {
+    transition: .15s;
+}
+
+.list-group-item:hover {
+    background-color: #eeeeee;
+}
