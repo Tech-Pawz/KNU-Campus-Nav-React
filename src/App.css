@@ -190,5 +190,7 @@ ul, li, ol {
   transform: translate(50%, 50%);
   animation:jump .9s ease-in Infinite Alternate;
 }
-
+.cursor-pointer{
+  cursor: pointer;
+}
 /* 커스텀 끝 */

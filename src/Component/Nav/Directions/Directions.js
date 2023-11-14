@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import $ from 'jquery';
 import dataPlace from '../dataPlace.json';
-
+import eventService from '../../../EventService';
 
 
 export default function Directions({ findBuil = "샬롬관" }) {
@@ -17,6 +17,17 @@ export default function Directions({ findBuil = "샬롬관" }) {
         if (Object.keys(dataPlace).includes(findBuil)) {
             setNowBuil(findBuil);
             setBuilData(Object.values(dataPlace[findBuil]));
+
+            //localstroage
+            let data = JSON.parse(localStorage.getItem('searchHistory'));
+            let item = {name:findBuil, time: (new Date()).toISOString()};
+            if(data) {
+                const filtered = data.filter(v => (v.name !== item.name));
+                let dataset =  [...filtered, ...[item]];
+
+                localStorage.setItem('searchHistory',JSON.stringify(dataset));
+            } else localStorage.setItem('searchHistory', JSON.stringify([item]));
+            eventService.emitEvent("updatedLocalStorage", true);
         }
     }, [findBuil]);
 
