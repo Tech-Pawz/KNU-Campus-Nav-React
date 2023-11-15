@@ -1,0 +1,32 @@
+.bus-title {
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.bus-radio {
+    font-size: 14px;
+}
+
+.bus-list-group {
+    padding-right: 0;
+}
+.bus-list {
+    width: 402px;
+}
+.bus-list::-webkit-scrollbar {
+    width: 7px;
+    padding: 3px;
+}
+.bus-list::-webkit-scrollbar-thumb {
+    background-color: #5a5a5a61;
+    border-radius: 10px;
+}
+.bus-list::-webkit-scrollbar-track {
+    background-color: #eeeeee;
+}
+
+.bus-list-group > li {
+    
+}
