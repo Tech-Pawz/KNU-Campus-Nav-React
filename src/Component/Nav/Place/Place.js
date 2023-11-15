@@ -11,7 +11,7 @@ import './Place.css';
 // ];
 
 
-export default function Place({findBuil}) {
+export default function Place({findBuil, search}) {
   const placeDataBase = [
     { icon: <i className="fa-regular fa-building"></i>, placeName: "길찾기" },
     { icon: <i className="fa-solid fa-flask"></i>, placeName: "최근 검색" },
@@ -29,7 +29,7 @@ export default function Place({findBuil}) {
       <div className="flex flex-jc-sa">
         {placeDataBase.map((el, idx) => <NavUi icon={el.icon} placeName={el.placeName} zIdx={zIdx} setZIdx={setZIdx} idx={idx} />)}
       </div>
-      <Inventory zIdx={zIdx} findBuil={findBuil} />
+      <Inventory zIdx={zIdx} findBuil={findBuil} search={search} />
     </div>
   );
 }
@@ -49,11 +49,11 @@ const NavUi = ({ icon, placeName, zIdx, setZIdx, idx }) => {
 }
 
 
-const Inventory = ({ zIdx, findBuil }) => {
+const Inventory = ({ zIdx, findBuil, search }) => {
   return (
     <div>
       <div className='po-rel' style={{ zIndex: zIdx[0] }}>
-        <Directions findBuil={findBuil} />
+        <Directions findBuil={findBuil} search={search} />
       </div>
       <div className='po-rel' style={{ zIndex: zIdx[1] }}>
         <Recent />
