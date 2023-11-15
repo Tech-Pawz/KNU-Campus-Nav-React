@@ -5,6 +5,7 @@ import Place from './Place/Place';
 
 export default function Nav() {
     const [findBuil, setFindBuil] = useState('')
+    const [search, setSearch] = useState('')
     const formInputNoRef = useRef(null);
 
     return (
@@ -19,12 +20,12 @@ export default function Nav() {
                     type="text"
                     ref={formInputNoRef}
                     value={findBuil}
-                    // onKeyDown={(evt) => {
-                    //     if (evt.key === 'Enter') {
-                    //         setFindBuil('');
-                    //         formInputNoRef.current.focus();
-                    //     }
-                    // }}
+                    onKeyDown={(evt) => {
+                        if (evt.key === 'Enter') {
+                            setSearch(findBuil);
+                            formInputNoRef.current.focus();
+                        }
+                    }}
                     onChange={(e) => setFindBuil(e.target.value)}
                 />
                 <div style={{ width: "24px", height: "24px", right: "16px", top: "12px", position: "absolute" }}>
@@ -35,7 +36,7 @@ export default function Nav() {
                     </svg>
                 </div>
             </div>
-            <Place findBuil={findBuil} />
+            <Place findBuil={findBuil} search={search} />
         </div>
     );
 }

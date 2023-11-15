@@ -1,22 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-import $ from 'jquery';
 import dataPlace from '../dataPlace.json';
 import eventService from '../../../EventService';
 
 
-export default function Directions({ findBuil = "샬롬관" }) {
+export default function Directions({ findBuil, search }) {
 
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
     const [nowBuil, setNowBuil] = useState('샬롬관');
-    const [builData, setBuilData] = useState(Object.values(dataPlace[nowBuil]));
     const startRef = useRef(null);
     const endRef = useRef(null);
 
     useEffect(() => {
         if (Object.keys(dataPlace).includes(findBuil)) {
             setNowBuil(findBuil);
-            setBuilData(Object.values(dataPlace[findBuil]));
 
             //localstroage
             let data = JSON.parse(localStorage.getItem('searchHistory'));
@@ -31,6 +28,10 @@ export default function Directions({ findBuil = "샬롬관" }) {
         }
     }, [findBuil]);
 
+    useEffect(() => {
+        setEnd(search);
+    }, [search])
+
 
     return (
         <div className="po-abs" style={{ left: '0', top: '100%', width: '100%', height: '100vh', backgroundColor: '#eeeeee' }}>
@@ -44,6 +45,11 @@ export default function Directions({ findBuil = "샬롬관" }) {
                         ref={startRef}
                         value={start}
                         onChange={(e) => setStart(e.target.value)}
+                        onKeyDown={(evt) => {
+                            if (evt.key === 'Enter') {
+                                startRef.current.focus();
+                            }
+                        }}
                     />
                 </div>
             </div>
@@ -52,11 +58,16 @@ export default function Directions({ findBuil = "샬롬관" }) {
                 <div className="w-inp-box" style={{ verticalAlign: 'middle', display: 'inline-block', width: "300px", height: "48px", position: "relative", background: "white", boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.20)", borderRadius: "0 0 8px 8px", margin: "1px 10px auto auto" }}>
                     <input
                         className="w-inp"
-                        placeholder={findBuil}
+                        placeholder=""
                         type="text"
                         ref={endRef}
                         value={end}
                         onChange={(e) => setEnd(e.target.value)}
+                        onKeyDown={(evt) => {
+                            if (evt.key === 'Enter') {
+                                endRef.current.focus();
+                            }
+                        }}
                     />
                 </div>
             </div>
