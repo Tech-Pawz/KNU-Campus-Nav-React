@@ -11,56 +11,38 @@ export default function Bus() {
     const goCafeToSchoolData = ['08:20', '08:30', '08:40', '08:50'];
     const goSchoolToCafeData = ['08:30', '08:40', '08:50', '09:00'];
 
-    let isChecked = [[false, false], [false, false]];
-
+    const [isChecked, setIsChecked] = useState([[false, false], [false, false]]);
+    // const buslist = useRef(null);
+    const busLeft = useRef(null);
+    const busRight = useRef(null);
+    // 버스 시간표와 현 시간 비교
     useEffect(() => {
         let nowTime = new Date();
-        if (nowRoute == 0) {
-            [goSchoolData, goGiheungData].forEach((arr, idx) => {
-                arr.forEach((v, i) => {
-                    let hAndm = v.split(":").map(v => parseInt(v));
-                    let vtime = new Date(nowTime.getFullYear(), nowTime.getMonth() + 1, nowTime.getDate(), parseInt(hAndm[0]), parseInt(hAndm[1]));
-                    // console.log(vtime);
-                    if (nowTime.getTime() <= vtime.getTime()) {
-                        if (!isChecked[nowRoute][idx]) isChecked[nowRoute][idx] = vtime.getTime();
-                        // else {
-                        //     if (isChecked[nowRoute][idx] < vtime.getTime() ) {
-                        //         isChecked[nowRoute][idx] = vtime.getTime();
-                        //     }
-                        // }
+        (nowRoute == 0 ? [goSchoolData, goGiheungData] : [goCafeToSchoolData, goSchoolToCafeData]).forEach((arr, idx) => {
+            arr.forEach((v, i) => {
+                let hAndm = v.split(":").map(v => parseInt(v));
+                let vtime = new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), parseInt(hAndm[0]), parseInt(hAndm[1]));
+                if (nowTime.getTime() < vtime.getTime()) {
+                    if (!isChecked[nowRoute][idx]) {
+                        let tmp = Object.assign([], isChecked);
+                        tmp[nowRoute][idx] = v;
+                        setIsChecked(tmp);
                     }
-                });
+                }
             });
-        } else {
-            [goCafeToSchoolData, goSchoolToCafeData].forEach((arr, idx) => {
-                arr.forEach((v, i) => {
-                    let hAndm = v.split(":").map(v => parseInt(v));
-                    let vtime = new Date(nowTime.getFullYear(), nowTime.getMonth() + 1, nowTime.getDate(), parseInt(hAndm[0]), parseInt(hAndm[1]));
-                    if (nowTime.getTime() < vtime.getTime()) {
-                        if (!isChecked[nowRoute][idx]) isChecked[nowRoute][idx] = vtime.getTime();
-                        else {
-                            if (isChecked[nowRoute][idx] < vtime.getTime() ) {
-                                isChecked[nowRoute][idx] = vtime.getTime();
-                            }
-                        }
-                    }
-                });
-            }); ``
-        }
-        console.log(isChecked);
+        });
+        setScrollPosition(busLeft);
     }, [nowRoute]);
 
-    const checkNowBus = (time, text) => {
-        let t = new Date(time);
-        let hAndm = text.split(":").map(v => parseInt(v));
-        if (t.getHours() == hAndm[0] &&
-            t.getMinutes() == hAndm[1]) {
-            return true;
+    useEffect(() => {
+        setScrollPosition(busLeft);
+    }, [isChecked]);
+
+    const setScrollPosition = (ref) => {
+        if (ref.current) {
+            ref.current.scrollIntoView({ behavior: 'smooth' });
         }
-        return false;
-    }
-
-
+    };
     return (
         <div className="po-abs" style={{ left: '0', top: '100%', width: '100%', height: '100vh', backgroundColor: '#eeeeee' }}>
             <div className="container flex p-2">
@@ -80,22 +62,20 @@ export default function Bus() {
                 </div>
             </div>
 
-            <div className="container text-center bus-title">
+            <div className="container text-center bus-title cursor-pointer">
                 <div className="row">
-                    <div className="col p-2">
-                        이공관 방향
-                    </div>
-                    <div className="col p-2">
+                    <div className="col p-2" onClick={() => setScrollPosition(busLeft)}> 이공관 방향 </div>
+                    <div className="col p-2" onClick={() => setScrollPosition(busRight)}>
                         {nowRoute == 0 ? "기흥역" : "스타벅스"} 방향
                     </div>
                 </div>
             </div>
             <div className="row bus-list" style={{ overflowY: "scroll", height: "calc(100vh - 275px)", margin: "none" }}>
-                <ul className="col list-group list-group-flush bus-list-group ">
+                <ul className="col list-group list-group-flush bus-list-group">
                     {
 
                         (nowRoute == 0 ? goSchoolData : goCafeToSchoolData).map((v, i) => (
-                            <li className={checkNowBus(isChecked[nowRoute][i],v) ?  "list-group-item p-4 bus-list-item-light" : "list-group-item p-4"} key={i}>
+                            <li ref={isChecked[nowRoute][0] == v ? busLeft : null} className={isChecked[nowRoute][0] == v ? "list-group-item p-4 bus-list-item-light" : "list-group-item p-4"} key={i}>
                                 <div className="fw-bold">{v}</div>
                                 <span className='disabled'>{nowRoute == 0 ? "기흥" : "스타벅스"} &gt; 이공관</span>
                             </li>
@@ -104,10 +84,10 @@ export default function Bus() {
 
 
                 </ul>
-                <ul className="col list-group list-group-flush bus-list-group ">
+                <ul className="col list-group list-group-flush bus-list-group">
                     {
                         (nowRoute == 0 ? goGiheungData : goSchoolToCafeData).map((v, i) => (
-                            <li className={checkNowBus(isChecked[nowRoute][i],v) ?  "list-group-item p-4 bus-list-item-light" : "list-group-item p-4"} key={i}>
+                            <li ref={isChecked[nowRoute][1] == v ? busRight : null} className={isChecked[nowRoute][1] == v ? "list-group-item p-4 bus-list-item-light" : "list-group-item p-4"} key={i}>
                                 <div className="fw-bold">{v}</div>
                                 <span className='disabled'>이공관 &gt; {nowRoute == 0 ? "기흥" : "스타벅스"}</span>
                             </li>
