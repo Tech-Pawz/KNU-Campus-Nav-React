@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect } from 'react';
 const INF = Number.MAX_SAFE_INTEGER;
 
 const dijkstra = (pointLen, roadLen, edges, start, end) => {
@@ -70,7 +71,7 @@ const numbering = (buil) => {
             return 11;
         default:
             console.log("입력값이 잘못되었습니다.")
-            return 1;
+            return -1;
     }
 }
 
@@ -79,7 +80,7 @@ const roadLen = 18;
 
 // 사용 예시
 let start = "샬롬관";
-let end = "이공관";
+let end = "교육관";
 start = numbering(start);
 end = numbering(end);
 
@@ -106,7 +107,7 @@ const edges = [
 ];
 
 const resultWithPath = dijkstra(pointLen, roadLen, edges, start, end);
-console.log(resultWithPath);
+// console.log(resultWithPath);
 
 // 예시 출력 (start = "샬롬관", end = "이공관")
 // {
@@ -121,3 +122,17 @@ console.log(resultWithPath);
 //       11
 //     ]
 //   }
+
+
+export function FindRoad(s,e) {
+    // console.log(s, e);
+    let start = numbering(s);
+    let end = numbering(e);
+    if(start && end) {
+        const res = dijkstra(pointLen, roadLen, edges, start, end);
+        // console.log(resultWithPath);
+        return res;
+    } else {
+        return "재입력";
+    }
+}

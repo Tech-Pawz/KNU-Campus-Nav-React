@@ -9,7 +9,7 @@
 .place-list {
     overflow-y: scroll;
     margin: 0;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 344px - 0.5rem);
 }
 
 .place-list::-webkit-scrollbar {

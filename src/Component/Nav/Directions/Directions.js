@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import dataPlace from '../dataPlace.json';
 import eventService from '../../../EventService';
-
+import {FindRoad} from '../../Road/road';
 
 export default function Directions({ findBuil, search }) {
 
@@ -17,12 +17,12 @@ export default function Directions({ findBuil, search }) {
 
             //localstroage
             let data = JSON.parse(localStorage.getItem('searchHistory'));
-            let item = {name:findBuil, time: (new Date()).toISOString()};
-            if(data) {
+            let item = { name: findBuil, time: (new Date()).toISOString() };
+            if (data) {
                 const filtered = data.filter(v => (v.name !== item.name));
-                let dataset =  [...filtered, ...[item]];
+                let dataset = [...filtered, ...[item]];
 
-                localStorage.setItem('searchHistory',JSON.stringify(dataset));
+                localStorage.setItem('searchHistory', JSON.stringify(dataset));
             } else localStorage.setItem('searchHistory', JSON.stringify([item]));
             eventService.emitEvent("updatedLocalStorage", true);
         }
@@ -32,6 +32,11 @@ export default function Directions({ findBuil, search }) {
         setEnd(search);
     }, [search])
 
+    const inputToFindRoad = () => {
+        // console.log(start, end);
+        let res = FindRoad(start, end);
+        console.log(res);
+    }
 
     return (
         <div className="po-abs" style={{ left: '0', top: '100%', width: '100%', height: '100vh', backgroundColor: '#eeeeee' }}>
@@ -71,10 +76,14 @@ export default function Directions({ findBuil, search }) {
                     />
                 </div>
             </div>
-
+            <div className='send-form d-grid gap-2 d-md-flex justify-content-md-end'>
+                <button type="button" class="btn btn-primary btn-sm m-2" onClick={inputToFindRoad}>
+                    길찾기 <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
             <ul className="place-list list-group">
                 {Object.keys(dataPlace[nowBuil]).map((v, i) => <li className="list-group-item">
-                    <ul key={i} className='nav-ul flex' style={{paddingLeft: '0px'}}>
+                    <ul key={i} className='nav-ul flex' style={{ paddingLeft: '0px' }}>
                         <li>{v}</li>
                         <li className='col'>{dataPlace[nowBuil][v]}</li>
                     </ul>
