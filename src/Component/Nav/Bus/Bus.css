@@ -15,9 +15,11 @@
 .bus-list {
     width: 402px;
 }
+
 .bus-list::-webkit-scrollbar {
-    width: 7px;
-    padding: 3px;
+    display: none;
+    /* width: 7px;
+    padding: 3px; */
 }
 .bus-list::-webkit-scrollbar-thumb {
     background-color: #5a5a5a61;
@@ -29,4 +31,11 @@
 
 .bus-list-group > li {
     
+}
+
+.bus-list-item-light {
+    background-color: rgb(235 247 253);
+}
+.bus-list-item-light:hover {
+    background-color: rgb(235 247 253);
 }
