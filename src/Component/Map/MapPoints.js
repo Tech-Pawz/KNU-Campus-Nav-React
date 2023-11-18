@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const points = [
+export const points = [
     { id: 1, name: "샬롬", latlng: { lat: 37.27474571017286, lng: 127.1302733945799 } },
     { id: 2, name: "인문사회", latlng: { lat: 37.27509398192308, lng: 127.13107171678483 } },
     { id: 3, name: "우원", latlng: { lat: 37.27569220778272, lng: 127.13194095305134 } },
@@ -15,9 +15,9 @@ const points = [
     { id: 12, name: "a", latlng: { lat: 37.275345856906355, lng: 127.1314470559062 } },
     { id: 13, name: "d", latlng: { lat: 37.27622141040828, lng: 127.13208281906462 } },
     { id: 14, name: "c", latlng: { lat: 37.276198190913696, lng: 127.13270292484154 } },
-    { id: 15, name: "f", latlng: { lat: 37.2765691373003, lng: 127.13335473285674 } }
+    { id: 15, name: "f", latlng: { lat: 37.2765691373003, lng: 127.13335473285674 } },
+    { id: 16, name: "g", latlng: { lat: 37.2752000000000, lng: 127.13249900000000 } }
 ];
-
 
 
 export default function parseMapPoints(obj) {

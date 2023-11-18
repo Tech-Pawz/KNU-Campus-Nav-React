@@ -51,7 +51,7 @@ export default function Directions({ findBuil, search }) {
                 <div className="w-inp-box" style={{ verticalAlign: 'middle', display: 'inline-block', width: "300px", height: "48px", position: "relative", background: "white", boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.20)", borderRadius: "8px 8px 0 0", margin: "10px 0 auto auto" }}>
                     <input
                         className="w-inp"
-                        placeholder="ex) 샬101"
+                        placeholder="ex) 샬롬관"
                         type="text"
                         ref={startRef}
                         value={start}

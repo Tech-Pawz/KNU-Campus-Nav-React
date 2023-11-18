@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import {points} from '../Map/MapPoints';
 const INF = Number.MAX_SAFE_INTEGER;
 
-const dijkstra = (pointLen, roadLen, edges, start, end) => {
+const dijkstra = (edges, start, end, pointLen=16, roadLen=19) => {
     const road = Array.from({ length: pointLen }, () => []);
 
     for (let i = 0; i < roadLen; i++) {
@@ -47,6 +48,11 @@ const dijkstra = (pointLen, roadLen, edges, start, end) => {
 
 
 const numbering = (buil) => {
+    // 노선도
+const edges = [
+    [1, 2], [2, 12], [12, 3], [12, 4], [4, 13], [13, 5], [13, 14], [3, 14], [3, 16], [16, 8],
+    [14, 6], [8, 6], [8, 9], [5, 15], [7, 15], [9, 15], [9, 10], [7, 11], [9, 11]
+].map(([start, end]) => [start, end, getDistanceFromPath(start, end)]);
     switch (buil) {
         case "샬롬관":
             return 1;
@@ -76,36 +82,37 @@ const numbering = (buil) => {
     }
 }
 
-const pointLen = 15;
-const roadLen = 18;
-
 // 사용 예시
 // let start = "샬롬관";
 // let end = "교육관";
 // start = numbering(start);
 // end = numbering(end);
 
+
+//거리계산
+const getDistanceFromPath = (i, j) => {
+    function deg2rad(deg) {
+        return deg * (Math.PI / 180)
+    }
+
+    const path1 = points[i-1].latlng;
+    const path2 = points[j-1].latlng;
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(path2.lat - path1.lat);  // deg2rad below
+    var dLon = deg2rad(path2.lng - path1.lng);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(path1.lat)) * Math.cos(deg2rad(path2.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = Math.floor(R * c * 1000); // Distance in km => m
+    
+    return d;
+}
+
 // 노선도
 const edges = [
-    [1, 2, 1],
-    [2, 12, 1],
-    [12, 3, 1],
-    [12, 4, 2],
-    [4, 13, 2],
-    [13, 5, 1],
-    [13, 14, 1],
-    [3, 14, 1],
-    [3, 8, 4],
-    [14, 6, 1],
-    [8, 6, 1],
-    [8, 9, 2],
-    [5, 15, 2],
-    [7, 15, 1],
-    [9, 15, 1],
-    [9, 10, 1],
-    [7, 11, 2],
-    [9, 11, 1]
-];
+    [1, 2], [2, 12], [12, 3], [12, 4], [4, 13], [13, 5], [13, 14], [3, 14], [3, 16], [16, 8],
+    [14, 6], [8, 6], [8, 9], [5, 15], [7, 15], [9, 15], [9, 10], [7, 11], [9, 11]
+].map(([start, end]) => [start, end, getDistanceFromPath(start, end)]);
+
 
 // const resultWithPath = dijkstra(pointLen, roadLen, edges, start, end);
 // console.log(resultWithPath);
@@ -124,15 +131,17 @@ const edges = [
 //     ]
 //   }
 
-
-export function FindRoad(s,e) {
-    // console.log(s, e);
+export function FindRoad(s, e) {
     if(s && e) {
         let start = numbering(s);
         let end = numbering(e);
-        const res = dijkstra(pointLen, roadLen, edges, start, end);
-        alert(res.경로);
-        return res;
+        const res1 = dijkstra(edges, start, end);
+        const res2 = dijkstra(edges, end, start);
+        if (res1.거리 < res2.거리) {
+            return res1;
+        } else {
+            return {"거리": res1.거리, "경로": res2.경로.reverse()};
+        }
     } else {
         return false;
     }
