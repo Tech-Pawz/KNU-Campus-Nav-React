@@ -86,14 +86,13 @@ export default function KMap() {
 
     return (
         <div className='map-wrap'>
+            <div className='cnEwCe'>
+                <span className="blind">〈</span>
+            </div>
             <Map
                 center={{ lat: "37.2771248", lng: "127.1341975" }}
                 style={{ width: '100%', height: '100%' }}
-                level={3}
-            // onClick={handleClick}
-            // onRightClick={handleRightClick}
-            // onMouseMove={handleMouseMove}
-            >
+                level={3}>
 
                 {paths.map((path) => (
                     <CustomOverlayMap
@@ -130,27 +129,8 @@ export default function KMap() {
                             )}
                         </CustomOverlayMap>
                     ))}
-                {/* <Polyline
-                    path={isdrawing ? [paths[paths.length - 1], mousePosition] : []}
-                    strokeWeight={3} // 선의 두께입니다
-                    strokeColor={"#db4040"} // 선의 색깔입니다
-                    strokeOpacity={0.5} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-                    strokeStyle={"solid"} // 선의 스타일입니다
-                    // onCreate={setMoveLine}
-                    
-                /> */}
-                {/* {isdrawing && (
-                    <CustomOverlayMap position={mousePosition} yAnchor={1} zIndex={2}>
-                        <div className="dotOverlay distanceInfo">
-                            총거리{" "}
-                            <span className="number">
-                                {Math.round(clickLine.getLength() + moveLine.getLength())}
-                            </span>
-                            m
-                        </div>
-                    </CustomOverlayMap>
-                )} */}
             </Map>
+
         </div>
     )
 }

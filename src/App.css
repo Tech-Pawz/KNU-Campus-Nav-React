@@ -1,4 +1,3 @@
-
 /* 노말라이즈 시작 */
 * {
   box-sizing: border-box;
@@ -8,10 +7,21 @@
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-html, body , #root, .App { width: 100%; height: 100%; overflow: hidden;}
-ul, li, ol {
+html,
+body,
+#root,
+.App {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+ul,
+li,
+ol {
   list-style: none;
 }
+
 /* 노말라이즈 끝 */
 
 /* 라이브러리 시작 */
@@ -53,7 +63,7 @@ ul, li, ol {
   text-align: center;
 }
 
-.po-rel{
+.po-rel {
   position: relative;
 }
 
@@ -65,10 +75,11 @@ ul, li, ol {
   width: 100%;
 }
 
-.t-l-0{
+.t-l-0 {
   top: 0;
   left: 0;
 }
+
 /* 라이브러리 끝 */
 
 /* 커스텀 시작 */
@@ -77,7 +88,7 @@ ul, li, ol {
   width: 144px;
 }
 
-.logo > img {
+.logo>img {
   width: inherit;
 }
 
@@ -85,7 +96,7 @@ ul, li, ol {
   position: fixed;
   width: 390px;
   background-color: #0079C2;
-  
+
   /* border-top: 10px solid #00B185;
   border-bottom: 10px solid #00B185; */
   z-index: 1;
@@ -94,6 +105,7 @@ ul, li, ol {
 .BottomBar3 {
   overflow: hidden;
 }
+
 .BottomBarItem {
   background-color: #0079C2;
 }
@@ -106,10 +118,12 @@ ul, li, ol {
 .BottomBarItem.lite-green {
   background-color: #00B185;
 }
+
 .BottomBarItem.lite-green:hover {
   background-color: #04a980;
   cursor: pointer;
 }
+
 .navlogo_green {
   width: 140px;
   margin: 5px 10px;
@@ -142,7 +156,7 @@ ul, li, ol {
 }
 
 .w-inp:focus {
-  outline: none; 
+  outline: none;
 }
 
 .w-inp:focus .w-inp-box {
@@ -155,14 +169,16 @@ ul, li, ol {
   0% {
     bottom: 58%;
   }
+
   95% {
     width: 70px;
   }
+
   to {
     bottom: 50%;
-    width:73px;
-    height:70px;
-  } 
+    width: 73px;
+    height: 70px;
+  }
 }
 
 #chatbot-wrap {
@@ -177,6 +193,7 @@ ul, li, ol {
   border: none;
   cursor: pointer;
 }
+
 #chatbot-wrap:hover {
   background-color: #0e436e;
 }
@@ -188,9 +205,36 @@ ul, li, ol {
   bottom: 50%;
   right: 50%;
   transform: translate(50%, 50%);
-  animation:jump .9s ease-in Infinite Alternate;
+  animation: jump .9s ease-in Infinite Alternate;
 }
-.cursor-pointer{
+
+.cursor-pointer {
   cursor: pointer;
 }
+
+.cnEwCe {
+  position: fixed;
+  width: 22px;
+  height: 49px;
+  top: 50%;
+  /* left: 0; */
+  z-index: 100;
+  background-size: 428px 403px;
+  background-color: #fff;
+  font-size: 1px;
+  line-height: 1px;
+  border: 1px solid #ddd;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.blind {
+  font-size: 18px;
+  /* overflow: hidden !important; */
+  position: absolute !important;
+  top: 22px;
+  left: -5px;
+  color: #959595;
+}
+
 /* 커스텀 끝 */
