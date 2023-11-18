@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import dataPlace from '../dataPlace.json';
 import eventService from '../../../EventService';
 import {FindRoad} from '../../Road/road';
+import parseMapPoints from '../../Map/MapPoints';
 
 export default function Directions({ findBuil, search }) {
 
@@ -35,7 +36,12 @@ export default function Directions({ findBuil, search }) {
     const inputToFindRoad = () => {
         // console.log(start, end);
         let res = FindRoad(start, end);
-        console.log(res);
+        if(res) {
+            let pointArr = parseMapPoints(res);
+            // console.log(pointArr);
+            eventService.emitEvent("addMapPoints", pointArr);
+        }
+
     }
 
     return (

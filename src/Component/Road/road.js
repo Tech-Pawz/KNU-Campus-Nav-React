@@ -126,13 +126,13 @@ const resultWithPath = dijkstra(pointLen, roadLen, edges, start, end);
 
 export function FindRoad(s,e) {
     // console.log(s, e);
-    let start = numbering(s);
-    let end = numbering(e);
-    if(start && end) {
+    if(s && e) {
+        let start = numbering(s);
+        let end = numbering(e);
         const res = dijkstra(pointLen, roadLen, edges, start, end);
-        // console.log(resultWithPath);
+        console.log(res);
         return res;
     } else {
-        return "재입력";
+        return false;
     }
 }
