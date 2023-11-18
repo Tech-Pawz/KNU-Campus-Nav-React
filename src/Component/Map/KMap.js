@@ -41,7 +41,7 @@ export default function KMap() {
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             const d = Math.floor(R * c * 1000); // Distance in km => m
             console.log(d);
-            arr = [...arr, ...[d]];
+            arr = [...arr, ...[sum + d]];
             sum += d;
         }
         setDistances([
