@@ -4,6 +4,7 @@ import  { useState, useEffect} from 'react';
 import './App.css';
 import KMap from './Component/Map/KMap';
 import Nav from './Component/Nav/Nav';
+import Chatbot from './Component/Chatbot/Chatbot';
 
 
 function App() {
@@ -13,10 +14,7 @@ function App() {
     <div className="App">
       <Nav />
       <KMap/>
-      <div id='chatbot-wrap'>
-        <img src='./images/icons8-chatbot-96.png' alt='icon' id='chatbot'/>
-      </div>
-     
+      <Chatbot />
     </div>
   );
 }

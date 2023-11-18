@@ -7,6 +7,7 @@ const dijkstra = (pointLen, roadLen, edges, start, end) => {
     for (let i = 0; i < roadLen; i++) {
         const [x, y, z] = edges[i];
         road[x - 1].push([y - 1, z]);
+        road[y - 1].push([x - 1, z]); // 양방향성 고려
     }
 
     const que = [];
@@ -79,10 +80,10 @@ const pointLen = 15;
 const roadLen = 18;
 
 // 사용 예시
-let start = "샬롬관";
-let end = "교육관";
-start = numbering(start);
-end = numbering(end);
+// let start = "샬롬관";
+// let end = "교육관";
+// start = numbering(start);
+// end = numbering(end);
 
 // 노선도
 const edges = [
@@ -106,7 +107,7 @@ const edges = [
     [9, 11, 1]
 ];
 
-const resultWithPath = dijkstra(pointLen, roadLen, edges, start, end);
+// const resultWithPath = dijkstra(pointLen, roadLen, edges, start, end);
 // console.log(resultWithPath);
 
 // 예시 출력 (start = "샬롬관", end = "이공관")
@@ -130,7 +131,7 @@ export function FindRoad(s,e) {
         let start = numbering(s);
         let end = numbering(e);
         const res = dijkstra(pointLen, roadLen, edges, start, end);
-        console.log(res);
+        alert(res.경로);
         return res;
     } else {
         return false;
