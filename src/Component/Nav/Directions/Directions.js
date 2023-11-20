@@ -59,6 +59,9 @@ export default function Directions({ findBuil, search }) {
                         onKeyDown={(evt) => {
                             if (evt.key === 'Enter') {
                                 startRef.current.focus();
+                                if (Object.keys(dataPlace).includes(start) && Object.keys(dataPlace).includes(end)) {
+                                    inputToFindRoad();
+                                }
                             }
                         }}
                     />
@@ -77,13 +80,16 @@ export default function Directions({ findBuil, search }) {
                         onKeyDown={(evt) => {
                             if (evt.key === 'Enter') {
                                 endRef.current.focus();
+                                if (Object.keys(dataPlace).includes(start) && Object.keys(dataPlace).includes(end)) {
+                                    inputToFindRoad();
+                                }
                             }
                         }}
                     />
                 </div>
             </div>
             <div className='send-form d-grid gap-2 d-md-flex justify-content-md-end'>
-                <button type="button" class="btn btn-primary btn-sm m-2" style={{width: '100%', height: '40px'}} onClick={inputToFindRoad}>
+                <button type="button" class="btn btn-primary btn-sm m-2" style={{minWidth: '100%', height: '40px'}} onClick={inputToFindRoad}>
                     길찾기 <i class="fa-solid fa-angle-right"></i>
                 </button>
             </div>
