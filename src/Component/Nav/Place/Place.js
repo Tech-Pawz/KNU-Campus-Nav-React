@@ -13,9 +13,9 @@ import './Place.css';
 
 export default function Place({findBuil, search}) {
   const placeDataBase = [
-    { icon: <i className="fa-regular fa-building"></i>, placeName: "길찾기" },
-    { icon: <i className="fa-solid fa-flask"></i>, placeName: "최근 검색" },
-    { icon: <i className="fa-solid fa-clipboard-question"></i>, placeName: "달구지" }
+    { icon: <i class="fa-solid fa-magnifying-glass"></i>, placeName: "길찾기" },
+    { icon: <i class="fa-solid fa-clock"></i>, placeName: "최근 검색" },
+    { icon: <i class="fa-solid fa-bus"></i>, placeName: "달구지" }
   ];
   const [zIdx, setZIdx] = useState([1, 0, 0]);
 

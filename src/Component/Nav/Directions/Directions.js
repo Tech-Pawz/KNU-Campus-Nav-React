@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import dataPlace from '../dataPlace.json';
 import eventService from '../../../EventService';
-import {FindRoad} from '../../Road/road';
+import { FindRoad } from '../../Road/road';
 import parseMapPoints from '../../Map/MapPoints';
 
 export default function Directions({ findBuil, search }) {
@@ -35,13 +35,14 @@ export default function Directions({ findBuil, search }) {
 
     const inputToFindRoad = () => {
         // console.log(start, end);
-        let res = FindRoad(start, end);
-        if(res) {
-            let pointArr = parseMapPoints(res);
-            // console.log(pointArr);
-            eventService.emitEvent("addMapPoints", pointArr);
+        if (Object.keys(dataPlace).includes(start) && Object.keys(dataPlace).includes(end)) {
+            let res = FindRoad(start, end);
+            if (res) {
+                let pointArr = parseMapPoints(res);
+                // console.log(pointArr);
+                eventService.emitEvent("addMapPoints", pointArr);
+            }
         }
-
     }
 
     return (
@@ -59,9 +60,7 @@ export default function Directions({ findBuil, search }) {
                         onKeyDown={(evt) => {
                             if (evt.key === 'Enter') {
                                 startRef.current.focus();
-                                if (Object.keys(dataPlace).includes(start) && Object.keys(dataPlace).includes(end)) {
-                                    inputToFindRoad();
-                                }
+                                inputToFindRoad();
                             }
                         }}
                     />
@@ -80,16 +79,14 @@ export default function Directions({ findBuil, search }) {
                         onKeyDown={(evt) => {
                             if (evt.key === 'Enter') {
                                 endRef.current.focus();
-                                if (Object.keys(dataPlace).includes(start) && Object.keys(dataPlace).includes(end)) {
-                                    inputToFindRoad();
-                                }
+                                inputToFindRoad();
                             }
                         }}
                     />
                 </div>
             </div>
             <div className='send-form d-grid gap-2 d-md-flex justify-content-md-end'>
-                <button type="button" class="btn btn-primary btn-sm m-2" style={{minWidth: '100%', height: '40px'}} onClick={inputToFindRoad}>
+                <button type="button" class="btn btn-primary btn-sm m-2" style={{ width: '100%', height: '40px' }} onClick={inputToFindRoad}>
                     길찾기 <i class="fa-solid fa-angle-right"></i>
                 </button>
             </div>

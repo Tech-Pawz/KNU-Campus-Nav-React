@@ -95,7 +95,20 @@ export default function KMap() {
                 style={{ width: '100%', height: '100%' }}
                 level={3}>
 
-                {paths.map((path) => (
+                {paths.map((path, i) => 
+                i == paths.length-1 ?
+                (<MapMarker
+                    key={`dot-${path.lat},${path.lng}`}
+                    position={path}
+                    // image={{
+                    //   src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                    //   size: {
+                    //     width: 24,
+                    //     height: 35
+                    //   }, // 마커이미지의 크기입니다
+                    // }}
+                  />) :
+                (
                     <CustomOverlayMap
                         key={`dot-${path.lat},${path.lng}`}
                         position={path}
