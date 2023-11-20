@@ -11,6 +11,7 @@ export default function KMap() {
     const [isdrawing, setIsdrawing] = useState(false);
     const [paths, setPaths] = useState([]);
     const [distances, setDistances] = useState([]);
+    const [nev, setNev] = useState(true);
 
     useEffect(() => {
         eventService.listenEvent("addMapPoints", (points) => {
@@ -20,7 +21,7 @@ export default function KMap() {
             }
             console.log(points);
             setPaths(points);
-            let sum = getDistanceFromPath(points);
+            getDistanceFromPath(points);
         });
     }, []);
 
@@ -87,7 +88,7 @@ export default function KMap() {
     return (
         <div className='map-wrap'>
             <div className='cnEwCe'>
-                <span className="blind">〈</span>
+                <span className="blind">〉</span>
             </div>
             <Map
                 center={{ lat: "37.2771248", lng: "127.1341975" }}

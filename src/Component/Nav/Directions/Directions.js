@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import dataPlace from '../dataPlace.json';
 import eventService from '../../../EventService';
 import {FindRoad} from '../../Road/road';
@@ -83,7 +83,7 @@ export default function Directions({ findBuil, search }) {
                 </div>
             </div>
             <div className='send-form d-grid gap-2 d-md-flex justify-content-md-end'>
-                <button type="button" class="btn btn-primary btn-sm m-2" onClick={inputToFindRoad}>
+                <button type="button" class="btn btn-primary btn-sm m-2" style={{width: '100%', height: '40px'}} onClick={inputToFindRoad}>
                     길찾기 <i class="fa-solid fa-angle-right"></i>
                 </button>
             </div>

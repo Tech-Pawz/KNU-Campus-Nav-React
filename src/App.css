@@ -216,7 +216,7 @@ ol {
   position: fixed;
   width: 22px;
   height: 49px;
-  top: 50%;
+  top: 27%;
   /* left: 0; */
   z-index: 100;
   background-size: 428px 403px;
@@ -233,7 +233,7 @@ ol {
   /* overflow: hidden !important; */
   position: absolute !important;
   top: 22px;
-  left: -5px;
+  left: 5px;
   color: #959595;
 }
 
