@@ -1,7 +1,5 @@
 import React, { useState, useRef } from 'react';
 import Place from './Place/Place';
-import eventService from "../../EventService";
-
 
 
 export default function Nav() {
@@ -10,7 +8,7 @@ export default function Nav() {
     const [moveNav, setMoveNav] = useState(true);
     const formInputNoRef = useRef(null);
 
-    eventService.listenEvent("navSwitch", (navBool) => { setMoveNav(navBool) });
+    // eventService.listenEvent("navSwitch", (navBool) => { setMoveNav(navBool) });
 
     return (
         <div id='nav' className={moveNav ? "" : "moveNav"}>
@@ -41,6 +39,10 @@ export default function Nav() {
                 </div>
             </div>
             <Place findBuil={findBuil} search={search} />
+
+            <div className='cnEwCe' onClick={() => { setMoveNav(!moveNav); }}>
+                <span className="blind">〉</span>
+            </div>
         </div>
     );
 }
