@@ -3,7 +3,7 @@ import "./KMap.css";
 import { Map, MapMarker, Polyline, CustomOverlayMap } from "react-kakao-maps-sdk";
 import eventService from "../../EventService";
 import useKakaoLoader from "./useKakaoLoader";
-
+import Panorama from "../Panorama/Panorama";
 
 
 export default function KMap() {
@@ -18,6 +18,8 @@ export default function KMap() {
         center: { lat: 37.27474571017286, lng: 127.1302733945799 },
         isPanto: false
     });
+    // 이미지 state
+    const [pano, setPano] = useState(false);
 
 
     useEffect(() => {
@@ -171,12 +173,12 @@ export default function KMap() {
                                         <h4 className="">{searchBuildInfo.name}</h4>
                                         <span><i className="fa-solid fa-building"></i></span>
                                     </div>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" className="btn btn-primary" disabled>Left</button>
-                                        <button type="button" className="btn btn-primary" disabled>
+                                    <div className="btn-group" role="group" aria-label="Basic example" style={{width: '80%'}}>
+                                        <div type="button" className="btn btn-primary" disabled>Left</div>
+                                        <div type="button" onClick={() => {setPano(!pano)}} className="btn btn-primary" disabled>
                                             <i className="fa-solid fa-panorama"></i>
-                                        </button>
-                                        <button type="button" className="btn btn-primary" disabled>Right</button>
+                                        </div>
+                                        <div type="button" className="btn btn-primary" disabled>Right</div>
                                     </div>
                                     <div className="close-btn" onClick={() => setSBInfoShow(searchBuildInfo.isShow)}>
                                         <i className="fa-solid fa-xmark"></i>
@@ -194,6 +196,9 @@ export default function KMap() {
                     </>
                 ) : ''}
             </Map>
+            <div className="load-view" style={{ zIndex: pano ? '100' : '0' , display: pano ? 'block' : 'none' }}>
+                <Panorama pano={pano} setPano={setPano} />
+            </div>
 
         </div>
     )
