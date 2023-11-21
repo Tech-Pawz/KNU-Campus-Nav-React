@@ -8,19 +8,31 @@ import useKakaoLoader from "./useKakaoLoader";
 
 export default function KMap() {
     useKakaoLoader();
+    //길안내 state
     const [isdrawing, setIsdrawing] = useState(false);
     const [paths, setPaths] = useState([]);
     const [distances, setDistances] = useState([]);
+    // 건물검색 state
+    const [searchBuildInfo, setSearchBuildInfo] = useState(null); // 건물좌표
+    const [mapSetting, setMapSetting] = useState({
+        center: { lat: 37.27474571017286, lng: 127.1302733945799 },
+        isPanto: false
+    });
+
 
     useEffect(() => {
         eventService.listenEvent("addMapPoints", (points) => {
             if (!isdrawing) {
-                setDistances([]);
-                setPaths([]);
+                removeAll();
             }
-            console.log(points);
             setPaths(points);
             getDistanceFromPath(points);
+        });
+
+        eventService.listenEvent("mapPointerToCenter", (pointData) => {
+            removeAll();
+            setSearchBuildInfo({ ...pointData, ...{ isShow: false } });
+            setMapSetting({ center: pointData.latlng, isPanto: true });
         });
     }, []);
 
@@ -84,35 +96,40 @@ export default function KMap() {
         )
     }
 
+    const removeAll = () => {
+        setDistances([]);
+        setPaths([]);
+        setSearchBuildInfo(null);
+    }
+
+    const setSBInfoShow = (isShow) => {
+        let temp = Object.assign({}, searchBuildInfo);
+        temp.isShow = !isShow;
+        setSearchBuildInfo(temp);
+    }
+
     return (
         <div className='map-wrap'>
             <Map
-                center={{ lat: "37.27474571017286", lng: "127.1302733945799" }}
+                center={mapSetting.center}
+                isPanto={mapSetting.isPanto}
                 style={{ width: '100%', height: '100%' }}
                 level={3}>
 
-                {paths.map((path, i) => 
-                i == paths.length-1 ?
-                (<MapMarker
-                    key={`dot-${path.lat},${path.lng}`}
-                    position={path}
-                    // image={{
-                    //   src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                    //   size: {
-                    //     width: 24,
-                    //     height: 35
-                    //   }, // 마커이미지의 크기입니다
-                    // }}
-                  />) :
-                (
-                    <CustomOverlayMap
-                        key={`dot-${path.lat},${path.lng}`}
-                        position={path}
-                        zIndex={1}
-                    >
-                        <span className="dot"></span>
-                    </CustomOverlayMap>
-                ))}
+                {paths.map((path, i) =>
+                    i == paths.length - 1 ?
+                        (<MapMarker
+                            key={`dot-${path.lat},${path.lng}`}
+                            position={path} />) :
+                        (
+                            <CustomOverlayMap
+                                key={`dot-${path.lat},${path.lng}`}
+                                position={path}
+                                zIndex={1}
+                            >
+                                <span className="dot"></span>
+                            </CustomOverlayMap>
+                        ))}
 
                 <Polyline
                     path={paths}
@@ -120,7 +137,6 @@ export default function KMap() {
                     strokeColor={"#5255ee"} // 선의 색깔입니다
                     strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
                     strokeStyle={"solid"} // 선의 스타일입니다
-                // onCreate={setClickLine}
                 />
 
                 {paths.length > 1 &&
@@ -139,6 +155,44 @@ export default function KMap() {
                             )}
                         </CustomOverlayMap>
                     ))}
+
+                {/* 검색 시 화면 */}
+                {searchBuildInfo ? (
+                    <>
+
+                        {searchBuildInfo.isShow ?
+                            (<CustomOverlayMap
+                                key={`buildPathInfo-${searchBuildInfo.latlng.lat},${searchBuildInfo.latlng.lng}`}
+                                position={searchBuildInfo.latlng}
+                                yAnchor={1}
+                                zIndex={2} >
+                                <div className="buildInfo">
+                                    <div className="buildInfo-title">
+                                        <h4 className="">{searchBuildInfo.name}</h4>
+                                        <span><i className="fa-solid fa-building"></i></span>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" className="btn btn-primary" disabled>Left</button>
+                                        <button type="button" className="btn btn-primary" disabled>
+                                            <i className="fa-solid fa-panorama"></i>
+                                        </button>
+                                        <button type="button" className="btn btn-primary" disabled>Right</button>
+                                    </div>
+                                    <div className="close-btn" onClick={() => setSBInfoShow(searchBuildInfo.isShow)}>
+                                        <i className="fa-solid fa-xmark"></i>
+                                    </div>
+                                </div>
+
+                            </CustomOverlayMap>) : ''}
+
+
+                        <MapMarker
+                            key={`buildPathMarker-${searchBuildInfo.latlng.lat},${searchBuildInfo.latlng.lng}`}
+                            position={searchBuildInfo.latlng}
+                            onClick={() => setSBInfoShow(searchBuildInfo.isShow)}>
+                        </MapMarker>
+                    </>
+                ) : ''}
             </Map>
 
         </div>

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import dataPlace from '../dataPlace.json';
 import eventService from '../../../EventService';
 import { FindRoad } from '../../Road/road';
-import parseMapPoints from '../../Map/MapPoints';
+import parseMapPoints, { parseNameToPointData } from '../../Map/MapPoints';
 
 export default function Directions({ findBuil, search }) {
 
@@ -16,6 +16,10 @@ export default function Directions({ findBuil, search }) {
         if (Object.keys(dataPlace).includes(findBuil)) {
             setNowBuil(findBuil);
 
+            /*  */
+            let pointData = parseNameToPointData(findBuil);
+            eventService.emitEvent("mapPointerToCenter", pointData);
+            
             //localstroage
             let data = JSON.parse(localStorage.getItem('searchHistory'));
             let item = { name: findBuil, time: (new Date()).toISOString() };

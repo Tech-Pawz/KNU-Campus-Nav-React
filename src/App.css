@@ -249,4 +249,13 @@ ol {
   color: #959595;
 }
 
+.empty-contents {
+  text-align: center;
+  display: block;
+  padding-top: 62px;
+  line-height: 26px;
+  color: #000;
+  letter-spacing: -1px;
+}
+
 /* 커스텀 끝 */
