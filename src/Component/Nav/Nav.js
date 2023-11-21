@@ -1,15 +1,19 @@
 import React, { useState, useRef } from 'react';
 import Place from './Place/Place';
+import eventService from "../../EventService";
 
 
 
 export default function Nav() {
     const [findBuil, setFindBuil] = useState('')
     const [search, setSearch] = useState('')
+    const [moveNav, setMoveNav] = useState(true);
     const formInputNoRef = useRef(null);
 
+    eventService.listenEvent("navSwitch", (navBool) => { setMoveNav(navBool) });
+
     return (
-        <div id='nav'>
+        <div id='nav' className={moveNav ? "" : "moveNav"}>
             <div className="logo">
                 <img src="./images/wlogo.png" alt="logo" />
             </div>

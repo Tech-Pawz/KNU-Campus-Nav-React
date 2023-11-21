@@ -11,7 +11,9 @@ export default function KMap() {
     const [isdrawing, setIsdrawing] = useState(false);
     const [paths, setPaths] = useState([]);
     const [distances, setDistances] = useState([]);
-    const [nev, setNev] = useState(true);
+    const [nav, setNav] = useState(true);
+
+    eventService.emitEvent("navSwitch", nav);
 
     useEffect(() => {
         eventService.listenEvent("addMapPoints", (points) => {
@@ -86,8 +88,11 @@ export default function KMap() {
     }
 
     return (
-        <div className='map-wrap'>
-            <div className='cnEwCe'>
+        <div className='map-wrap' style={{marginLeft: nav ? '390px' : '0px', width: nav ? 'calc(100vw - 390px)' : '100vw'}}>
+            <div onClick={() => {
+                eventService.emitEvent("navSwitch", !nav);
+                setNav(!nav);
+            }} className='cnEwCe'>
                 <span className="blind">〉</span>
             </div>
             <Map
