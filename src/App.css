@@ -253,13 +253,13 @@ ol {
   height: 500px;
   border-radius: 10px;
   right: 20px;
-  background-color: #eeeeff;
+  background-color: #ffffff;
   border: 2px solid #83a3d6;
   color: #1d52a8;
   font-weight: bold;
   cursor: pointer;
   font-size: 2rem;
-  transition: .5s;
+  transition: .3s cubic-bezier(0,.57,.63,.82);
 }
 
 .cursor-pointer {

@@ -111,15 +111,12 @@ export default function Panorama({pano, setPano}) {
         arrowInfospotUp2_1.addEventListener('click', () => {
             viewer.setPanorama(panorama3);
         });
-
         arrowInfospotDown1_1.addEventListener('click', () => {
             viewer.setPanorama(panorama1);
         });
-
         arrowInfospotUp2_2.addEventListener('click', () => {
             viewer.setPanorama(panorama3);
         });
-
         arrowInfospotDown2_2.addEventListener('click', () => {
             viewer.setPanorama(panorama1);
         });
@@ -194,13 +191,13 @@ export default function Panorama({pano, setPano}) {
             viewer.setPanorama(panorama5);
         });
         arrowInfospotDown4_1.addEventListener('click', () => {
-            viewer.setPanorama(panorama4);
+            viewer.setPanorama(panorama3);
         });
         arrowInfospotUp4_2.addEventListener('click', () => {
             viewer.setPanorama(panorama5);
         });
         arrowInfospotDown4_2.addEventListener('click', () => {
-            viewer.setPanorama(panorama4);
+            viewer.setPanorama(panorama3);
         });
 
         panorama4.add(arrowInfospotUp4_1);
@@ -218,6 +215,7 @@ export default function Panorama({pano, setPano}) {
         arrowInfospotDown5_2.position.set(1500, 1500, -5050);
         arrowInfospotDown5_2.rotation.set(0, Math.PI, 0);
         arrowInfospotDown5_2.addHoverElement(document.getElementById('arrow-desc-container'), 200);
+        
         arrowInfospotDown5_1.addEventListener('click', () => {
             viewer.setPanorama(panorama4);
         });
