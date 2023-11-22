@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';  
+import React, { useEffect, useRef } from 'react';  
 import * as PANOLENS from 'panolens';
 import eventService from '../../EventService';
 
@@ -11,7 +11,6 @@ export default function Panorama({pano, setPano}) {
     useEffect(() => {
         let panorama, panorama1, panorama2, panorama3, panorama4, panorama5, viewer;
 
-
         panorama = new PANOLENS.ImagePanorama('../../../images/B1.JPG');
         panorama1 = new PANOLENS.ImagePanorama('../../../images/1.JPG');
         panorama2 = new PANOLENS.ImagePanorama('../../../images/2.JPG');
@@ -19,10 +18,8 @@ export default function Panorama({pano, setPano}) {
         panorama4 = new PANOLENS.ImagePanorama('../../../images/4.JPG');
         panorama5 = new PANOLENS.ImagePanorama('../../../images/5.JPG');
 
-
         viewer = new PANOLENS.Viewer({ container: viewerRef.current });
         viewer.add(panorama, panorama1, panorama2, panorama3, panorama4, panorama5);
-
 
 
         // 지하
@@ -37,7 +34,6 @@ export default function Panorama({pano, setPano}) {
         arrowInfospotUp_1.addEventListener('click', () => {
             viewer.setPanorama(panorama1);
         });
-
 
         arrowInfospotUp_2.addEventListener('click', () => {
             viewer.setPanorama(panorama1);
@@ -84,12 +80,8 @@ export default function Panorama({pano, setPano}) {
             viewer.setPanorama(panorama);
         });
 
-        // panorama1.remove(arrowInfospotUp_1);
         panorama1.add(arrowInfospotUp1_1);
-
-        // panorama1.remove(arrowInfospotUp_2);
         panorama1.add(arrowInfospotUp1_2);
-
         panorama1.add(arrowInfospotDown1_1);
         panorama1.add(arrowInfospotDown1_2);
 
@@ -132,16 +124,9 @@ export default function Panorama({pano, setPano}) {
             viewer.setPanorama(panorama1);
         });
 
-        // panorama2.remove(arrowInfospotUp1_1);
         panorama2.add(arrowInfospotUp2_1);
-
-        // panorama2.remove(arrowInfospotDown1_1);
         panorama2.add(arrowInfospotDown2_1);
-
-        // panorama2.remove(arrowInfospotUp1_2);
         panorama2.add(arrowInfospotUp2_2);
-
-        // panorama2.remove(arrowInfospotDown1_2);
         panorama2.add(arrowInfospotDown2_2);
 
 
@@ -169,29 +154,19 @@ export default function Panorama({pano, setPano}) {
         arrowInfospotUp3_1.addEventListener('click', () => {
             viewer.setPanorama(panorama4);
         });
-
         arrowInfospotDown3_1.addEventListener('click', () => {
             viewer.setPanorama(panorama2);
         });
-
         arrowInfospotUp3_2.addEventListener('click', () => {
             viewer.setPanorama(panorama4);
         });
-
         arrowInfospotDown3_2.addEventListener('click', () => {
             viewer.setPanorama(panorama2);
         });
 
-        // panorama3.remove(arrowInfospotUp2_1);
         panorama3.add(arrowInfospotUp3_1);
-
-        // panorama3.remove(arrowInfospotDown2_1);
         panorama3.add(arrowInfospotDown3_1);
-
-        // panorama3.remove(arrowInfospotUp2_2);
         panorama3.add(arrowInfospotUp3_2);
-
-        // panorama3.remove(arrowInfospotDown2_2);
         panorama3.add(arrowInfospotDown3_2);
 
         // 4층
@@ -218,29 +193,19 @@ export default function Panorama({pano, setPano}) {
         arrowInfospotUp4_1.addEventListener('click', () => {
             viewer.setPanorama(panorama5);
         });
-
         arrowInfospotDown4_1.addEventListener('click', () => {
             viewer.setPanorama(panorama4);
         });
-
         arrowInfospotUp4_2.addEventListener('click', () => {
             viewer.setPanorama(panorama5);
         });
-
         arrowInfospotDown4_2.addEventListener('click', () => {
             viewer.setPanorama(panorama4);
         });
 
-        // panorama4.remove(arrowInfospotUp3_1);
         panorama4.add(arrowInfospotUp4_1);
-
-        // panorama4.remove(arrowInfospotDown3_1);
         panorama4.add(arrowInfospotDown4_1);
-
-        // panorama4.remove(arrowInfospotUp3_2);
         panorama4.add(arrowInfospotUp4_2);
-
-        // panorama4.remove(arrowInfospotDown3_2);
         panorama4.add(arrowInfospotDown4_2);
 
         // 5층
@@ -253,25 +218,15 @@ export default function Panorama({pano, setPano}) {
         arrowInfospotDown5_2.position.set(1500, 1500, -5050);
         arrowInfospotDown5_2.rotation.set(0, Math.PI, 0);
         arrowInfospotDown5_2.addHoverElement(document.getElementById('arrow-desc-container'), 200);
-
         arrowInfospotDown5_1.addEventListener('click', () => {
             viewer.setPanorama(panorama4);
         });
-
         arrowInfospotDown5_2.addEventListener('click', () => {
             viewer.setPanorama(panorama4);
         });
 
-        // panorama5.remove(arrowInfospotUp4_1);
         panorama5.add(arrowInfospotDown5_1);
-
-        // panorama5.remove(arrowInfospotUp4_2);
-        // panorama5.remove(arrowInfospotDown4_1);
-        // panorama5.remove(arrowInfospotDown4_2);
-
         panorama5.add(arrowInfospotDown5_2);
-
-
     }, []);
 
     return (
